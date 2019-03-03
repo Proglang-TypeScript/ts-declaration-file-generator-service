@@ -3,8 +3,8 @@
 FILE_PATH=$1
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-if [ "${FILEPATH:0:1}" = "/" ]; then
-	ABS_FILE_PATH=FILEPATH
+if [ "${FILE_PATH:0:1}" = "/" ]; then
+	ABS_FILE_PATH=FILE_PATH
 else
 	ABS_FILE_PATH="$(pwd)/$FILE_PATH"
 fi
