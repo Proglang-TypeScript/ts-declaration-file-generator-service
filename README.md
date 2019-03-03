@@ -38,6 +38,10 @@ You can use the example provided in this repo under `example/calculator.js`.
 
 You will find the declaration file under `/tmp/ts-declaration-file/calculator/index.d.ts`:
 
+```shell
+cat /tmp/ts-declaration-file/calculator/index.d.ts
+```
+
 ```typescript
 export = calculator
 
