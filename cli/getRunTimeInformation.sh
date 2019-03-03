@@ -1,17 +1,20 @@
 #!/bin/bash
 
-FILE_PATH=$1
+ROOT_PROJECT_PATH=$1
+RELATIVE_PATH_TO_JS_FILE=index.js
+
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-if [ "${FILE_PATH:0:1}" = "/" ]; then
-	ABS_FILE_PATH=FILE_PATH
+if [ "${ROOT_PROJECT_PATH:0:1}" = "/" ]; then
+	ABS_ROOT_PROJECT_PATH=ROOT_PROJECT_PATH
 else
-	ABS_FILE_PATH="$(pwd)/$FILE_PATH"
+	ABS_ROOT_PROJECT_PATH="$(pwd)/$ROOT_PROJECT_PATH"
 fi
 
-FILE_IN_CONTAINER="/tmp/file.js"
+FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 
 docker run -it \
 	-a stdout \
-	-v $ABS_FILE_PATH:$FILE_IN_CONTAINER  \
-	master-mind-wp3
+	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
+	master-mind-wp3 \
+	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE
