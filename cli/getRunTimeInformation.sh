@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ROOT_PROJECT_PATH=$1
+RUNTIME_INFO_PATH=$2
 RELATIVE_PATH_TO_JS_FILE=index.js
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
@@ -13,8 +14,12 @@ fi
 
 FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 
+docker rm get-run-time-information > /dev/null 2>&1
 docker run -it \
-	-a stdout \
+	--name get-run-time-information \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
 	master-mind-wp3 \
 	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE
+
+docker cp get-run-time-information:/usr/local/app/output.json $RUNTIME_INFO_PATH
+docker rm get-run-time-information > /dev/null 2>&1
