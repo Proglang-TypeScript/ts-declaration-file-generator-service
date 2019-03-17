@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOT_PROJECT_PATH=$1
-RUNTIME_INFO_PATH=$2
+RUNTIME_INFO=$2
 RELATIVE_PATH_TO_JS_FILE=index.js
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
@@ -15,11 +15,13 @@ fi
 FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 
 docker rm get-run-time-information > /dev/null 2>&1
-docker run -it \
+docker run \
 	--name get-run-time-information \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
+	-v $SCRIPT_PATH/blacklistedModules.json:/tmp/blacklistedModules.json \
 	master-mind-wp3 \
-	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE
+	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE \
+	/tmp/blacklistedModules.json \
+	1> $RUNTIME_INFO
 
-docker cp get-run-time-information:/usr/local/app/output.json $RUNTIME_INFO_PATH
 docker rm get-run-time-information > /dev/null 2>&1
