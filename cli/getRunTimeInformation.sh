@@ -22,6 +22,15 @@ docker run \
 	master-mind-wp3 \
 	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE \
 	/tmp/blacklistedModules.json \
-	1> $RUNTIME_INFO
+	1> /tmp/runtimeinfo
+
+LINE_NUMBER="$(grep /tmp/runtimeinfo -ne "^{" | cut -f1 -d:)"
+LINE_NUMBER="$(($LINE_NUMBER-1))"
+
+if [ "$LINE_NUMBER" -gt "1" ]; then
+	sed -e "1,${LINE_NUMBER}d" /tmp/runtimeinfo > $RUNTIME_INFO
+else
+	cp /tmp/runtimeinfo $RUNTIME_INFO
+fi
 
 docker rm get-run-time-information > /dev/null 2>&1
