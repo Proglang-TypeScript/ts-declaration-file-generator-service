@@ -1,3 +1,7 @@
 [
-	"lodash"
+	"lodash",
+	"tempy",
+	"unique-string",
+	"crypto-random-string",
+	"temp-dir"
 ]
