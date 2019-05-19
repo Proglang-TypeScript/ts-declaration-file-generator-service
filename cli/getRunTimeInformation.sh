@@ -9,7 +9,7 @@ JS_FILE_NAME=$(basename "${JS_FILE}")
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 if [ "${ROOT_PROJECT_PATH:0:1}" = "/" ]; then
-	ABS_ROOT_PROJECT_PATH=ROOT_PROJECT_PATH
+	ABS_ROOT_PROJECT_PATH=$ROOT_PROJECT_PATH
 else
 	ABS_ROOT_PROJECT_PATH="$(pwd)/$ROOT_PROJECT_PATH"
 fi
