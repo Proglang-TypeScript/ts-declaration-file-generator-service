@@ -26,7 +26,7 @@ docker run \
 	/tmp/blacklistedModules.json \
 	1> /tmp/runtimeinfo
 
-LINE_NUMBER="$(grep /tmp/runtimeinfo -ne "^{" | cut -f1 -d:)"
+LINE_NUMBER="$(grep /tmp/runtimeinfo -ne "^{$" | cut -f1 -d:)"
 LINE_NUMBER="$(($LINE_NUMBER-1))"
 
 if [ "$LINE_NUMBER" -gt "1" ]; then
