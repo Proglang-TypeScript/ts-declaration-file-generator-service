@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ROOT_PROJECT_PATH=$1
+JS_FILE=$1
 RUNTIME_INFO=$2
-RELATIVE_PATH_TO_JS_FILE=index.js
+
+ROOT_PROJECT_PATH=$(dirname "${JS_FILE}")
+JS_FILE_NAME=$(basename "${JS_FILE}")
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
@@ -20,7 +22,7 @@ docker run \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
 	-v $SCRIPT_PATH/blacklistedModules.json:/tmp/blacklistedModules.json \
 	master-mind-wp3 \
-	$FILE_IN_CONTAINER/$RELATIVE_PATH_TO_JS_FILE \
+	$FILE_IN_CONTAINER/$JS_FILE_NAME \
 	/tmp/blacklistedModules.json \
 	1> /tmp/runtimeinfo
 
