@@ -13,12 +13,14 @@ else
 	ABS_RUNTIME_INFO="$(pwd)/$RUNTIME_INFO"
 fi
 
-docker rm generate-declaration-file > /dev/null 2>&1
+CONTAINER_NAME=$(LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo)
+
+docker rm $CONTAINER_NAME > /dev/null 2>&1
 docker run \
-	--name generate-declaration-file \
+	--name $CONTAINER_NAME \
 	-v $ABS_RUNTIME_INFO:/tmp/output.json \
 	tsd-generator \
 	--module-name $MODULE_NAME -i /tmp/output.json
 
-docker cp generate-declaration-file:/usr/local/app/output/. $RESULTS
-docker rm generate-declaration-file > /dev/null 2>&1
+docker cp $CONTAINER_NAME:/usr/local/app/output/. $RESULTS
+docker rm $CONTAINER_NAME > /dev/null 2>&1

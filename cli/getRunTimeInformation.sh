@@ -16,9 +16,11 @@ fi
 
 FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 
-docker rm get-run-time-information > /dev/null 2>&1
+CONTAINER_NAME=$(LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo)
+
+docker rm $CONTAINER_NAME > /dev/null 2>&1
 docker run \
-	--name get-run-time-information \
+	--name $CONTAINER_NAME \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
 	-v $SCRIPT_PATH/blacklistedModules.json:/tmp/blacklistedModules.json \
 	master-mind-wp3 \
@@ -35,4 +37,4 @@ else
 	cp /tmp/runtimeinfo $RUNTIME_INFO
 fi
 
-docker rm get-run-time-information > /dev/null 2>&1
+docker rm $CONTAINER_NAME > /dev/null 2>&1
