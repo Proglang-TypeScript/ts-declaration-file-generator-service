@@ -2,6 +2,7 @@
 
 JS_FILE=$1
 RUNTIME_INFO=$2
+TIMEOUT_SECONDS=$3
 
 ROOT_PROJECT_PATH=$(dirname "${JS_FILE}")
 JS_FILE_NAME=$(basename "${JS_FILE}")
@@ -19,7 +20,7 @@ FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 CONTAINER_NAME=$(LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo)
 
 docker rm $CONTAINER_NAME > /dev/null 2>&1
-gtimeout -k 300 290 docker run \
+gtimeout -k $TIMEOUT_SECONDS $TIMEOUT_SECONDS docker run \
 	--name $CONTAINER_NAME \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
 	-v $SCRIPT_PATH/blacklistedModules.json:/tmp/blacklistedModules.json \
