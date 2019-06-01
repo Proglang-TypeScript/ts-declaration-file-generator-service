@@ -19,7 +19,7 @@ FILE_IN_CONTAINER="/tmp/runtimeAnalysis"
 CONTAINER_NAME=$(LC_ALL=C tr -dc A-Za-z0-9 </dev/urandom | head -c 20 ; echo)
 
 docker rm $CONTAINER_NAME > /dev/null 2>&1
-docker run \
+gtimeout -k 300 290 docker run \
 	--name $CONTAINER_NAME \
 	-v $ABS_ROOT_PROJECT_PATH:$FILE_IN_CONTAINER  \
 	-v $SCRIPT_PATH/blacklistedModules.json:/tmp/blacklistedModules.json \
