@@ -43,9 +43,13 @@ cat /tmp/ts-declaration-file-generator-service/calculator/index.d.ts
 ```
 
 ```typescript
-export = calculator
+export = Calculator;
 
-declare namespace calculator {
-        export function sum(a: number, b: number): number
+declare class Calculator {
+    constructor();
+    sum(a: number, b: number): number;
+}
+
+declare namespace Calculator {
 }
 ```
