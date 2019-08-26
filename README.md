@@ -33,7 +33,7 @@ cd ts-declaration-file-generator-service
 You can use the example provided in this repo under `example/calculator.js`.
 
 ```shell
-./bin/run.sh examples/calculator.js calculator /tmp/ts-declaration-file-generator-service
+./bin/run.sh examples/example.js calculator /tmp/ts-declaration-file-generator-service
 ```
 
 You will find the declaration file under `/tmp/ts-declaration-file/calculator/index.d.ts`:
