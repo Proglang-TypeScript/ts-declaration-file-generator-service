@@ -5,16 +5,8 @@
 Install Docker.
 https://docs.docker.com/install/
 
-#### Clone this repository
-
-```shell
-git clone https://fcristiani@bitbucket.org/fcristiani/ts-declaration-file-generator-service.git
-```
-
 #### Install
-```shell
-cd ts-declaration-file-generator-service
-```
+Clone this repository and then run:
 
 ```shell
 ./install.sh
