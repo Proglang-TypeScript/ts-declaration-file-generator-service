@@ -9,5 +9,5 @@ mkdir -p $INSTALL_ROOT_FOLDER
 rm -Rf $INSTALL_FOLDER
 mkdir -p $INSTALL_FOLDER
 
-git clone https://bitbucket.org/dtsgenerate/ts-declaration-file-generator.git $INSTALL_FOLDER
+git clone https://github.com/proglang/ts-declaration-file-generator.git $INSTALL_FOLDER
 $INSTALL_FOLDER/build/build.sh
